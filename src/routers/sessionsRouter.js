@@ -21,8 +21,9 @@ sessionsRouter.route('/')
 
             const db = client.db(dbName)
             const sessions = await db.collection('sessions').find().toArray();
-            
+
             res.render('sessions', {sessions})
+            
         } catch (error) {
             debug(error.stack)
         }
@@ -49,9 +50,10 @@ sessionsRouter.route('/:id')
             // debug('Connected to the mongo DB')
 
             const db = client.db(dbName)
-            const session = await db.collection('sessions').findOne({_id : new ObjectID(id)});
+            const session = await db.collection('sessions').findOne({ _id : new ObjectID(id)});
             
-            res.render('session', { session, } )
+            res.render('session', {session} )
+            
         } catch (error) {
             debug(error.stack)
         }
@@ -59,4 +61,5 @@ sessionsRouter.route('/:id')
     }())
     })
 
+    
 module.exports = sessionsRouter;
